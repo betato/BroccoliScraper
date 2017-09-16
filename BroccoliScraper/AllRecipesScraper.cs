@@ -7,25 +7,13 @@ using HtmlAgilityPack;
 
 namespace BroccoliScraper
 {
-    class AllRecipesScraper : IRecipeScraper
+    class AllRecipesScraper : RecipeScraper
     {
 
         private const string searchUrl = "http://allrecipes.com/search/results/?wt=???&sort=re";
         private const string recipeBaseUrl = "http://allrecipes.com";
 
-        private string[] units =
-        {
-            "tablespoon",
-            "tablespoons",
-            "teaspoon",
-            "teaspoons",
-            "cup",
-            "cups",
-            "ounce",
-            "ounces"
-        };
-
-        public Recipe GetRecipe(string search)
+        public override Recipe GetRecipe(string search)
         {
             string recipeUrl  = recipeBaseUrl + FindRecipePage(search);
             var web = new HtmlWeb();
@@ -37,7 +25,7 @@ namespace BroccoliScraper
             {
                 if (isIngredientEntry(node))
                 {
-                    ingredients.Add(parseIngredient(node));
+                    ingredients.Add(parseIngredient(node.ChildNodes[1].ChildNodes[3].InnerText));
                 }
             }
             Recipe recipe = new Recipe();
@@ -86,48 +74,6 @@ namespace BroccoliScraper
             return !(entry.ChildNodes[1].Id == "btn-addtolist");
         }
 
-        private Ingredient parseIngredient(HtmlNode ingredientNode)
-        {
-            string text = ingredientNode.ChildNodes[1].ChildNodes[3].InnerText;
-            text = text.Replace('(', ' ');
-            text = text.Replace(')', ' ');
-            Ingredient ingredient = new Ingredient();
-            string[] split = text.Split(' ');
-            if (ParseQuantity(split[0], out float quantity))
-            {
-                ingredient.Quantity = quantity;
-                if (units.Contains(split[1]))
-                {
-                    ingredient.Unit = split[1];
-                    ingredient.Name = string.Join(" ", split.Skip(2).ToArray());
-                }
-                else
-                {
-                    ingredient.Name = string.Join(" ", split.Skip(1).ToArray());
-                }
-            }
-            return ingredient;
-        }
-
-        private bool ParseQuantity(string text, out float quantity)
-        {
-            if (float.TryParse(text, out float result))
-            {
-                quantity = result;
-                return true;
-            }
-            else if (text.Contains('/'))
-            {
-                var fractionSplit = text.Split('/');
-                if (float.TryParse(fractionSplit[0], out float numerator) && float.TryParse(fractionSplit[1], out float denominator))
-                {
-                    quantity = numerator / denominator;
-                    return true;
-                }
-            }
-            quantity = float.NaN;
-            return false;
-        }
     }
 
 }

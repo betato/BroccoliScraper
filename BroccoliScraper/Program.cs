@@ -15,7 +15,7 @@ namespace BroccoliScraper
         static void Main(string[] args)
         {
             AllRecipesScraper scraper = new AllRecipesScraper();
-            Recipe recipe = scraper.GetRecipe("cake");
+            Recipe recipe = scraper.GetRecipe("fish");
             Console.ReadKey(false);
 
             
