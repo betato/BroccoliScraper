@@ -51,6 +51,11 @@ namespace BroccoliScraper
 
         private bool ParseQuantity(string text, out float quantity)
         {
+            if (text == "A" || text == "a")
+            {
+                quantity = 1.0f;
+                return true;
+            }
             if (float.TryParse(text, out float result))
             {
                 quantity = result;
