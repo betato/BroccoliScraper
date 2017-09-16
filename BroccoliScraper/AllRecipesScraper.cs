@@ -51,7 +51,14 @@ namespace BroccoliScraper
                     break;
                 }
             }
-            return firstResult.ChildNodes[5].Attributes["href"].DeEntitizeValue;
+            foreach (HtmlNode node in firstResult.ChildNodes)
+            {
+                if (node.Name == "a")
+                {
+                    return node.Attributes["href"].DeEntitizeValue;
+                }
+            }
+            return null;
         }
 
         private bool isRecipe(HtmlNode node)
