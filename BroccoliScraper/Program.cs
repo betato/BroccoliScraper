@@ -14,12 +14,10 @@ namespace BroccoliScraper
 
         static void Main(string[] args)
         {
-            HtmlWeb webGet = new HtmlWeb();
-            //var doc = webGet.Load("http://allrecipes.com/search/results/?wt=croissant&sort=re");
-            var doc = webGet.Load("http://www.food.com/search/croissant");
-            var root = doc.DocumentNode;
-
-            
+            Food2ForkScraper scraper = new Food2ForkScraper();
+            Recipe recipe = scraper.GetRecipe("scrambled eggs");
+            Console.WriteLine(recipe.ToString());
+            Console.ReadKey(true);
         }
     }
 }
