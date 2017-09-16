@@ -42,6 +42,10 @@ namespace BroccoliScraper
                     ingredient.Name = string.Join(" ", split.Skip(1).ToArray());
                 }
             }
+            else
+            {
+                ingredient.Name = text;
+            }
             return ingredient;
         }
 
