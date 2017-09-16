@@ -15,7 +15,7 @@ namespace BroccoliScraper
 
         public override string ToString()
         {
-            return Quantity + " " + Unit + " " + Name;
+            return Quantity + " : " + Unit + " : " + Name;
         }
     }
 
@@ -29,7 +29,7 @@ namespace BroccoliScraper
         {
             StringBuilder builder = new StringBuilder();
             builder.Append(Name);
-            builder.Append(':');
+            builder.Append(":\n");
             foreach (var ingredient in Ingredients)
             {
                 builder.Append(ingredient.ToString());
