@@ -26,7 +26,12 @@ namespace BroccoliScraper
             "cups",
             "ounce",
             "ounces",
-            "tbsp"
+            "tbsp",
+            "pound",
+            "pounds",
+            "pinch",
+            "strip",
+            "strips"
         };
 
         public abstract Recipe GetRecipe(string search);
