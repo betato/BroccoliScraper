@@ -48,15 +48,7 @@ namespace BroccoliScraper
             if (firstType == QuantityType.Fraction)
             {
                 Quantity = firstQuantity;
-                if (IsUnit(split[1]))
-                {
-                    Unit = split[1];
-                    Name = string.Join(" ", split.Skip(2).ToArray());
-                }
-                else
-                {
-                    Name = string.Join(" ", split.Skip(1).ToArray());
-                }
+                ParseUnitsFrom(split, 1);
             }
             else if (firstType == QuantityType.Number)
             {
@@ -65,34 +57,35 @@ namespace BroccoliScraper
                 if (secondType == QuantityType.Fraction)
                 {
                     Quantity = firstQuantity + secondQuantity;
-                    if (IsUnit(split[2]))
-                    {
-                        Unit = split[2];
-                        Name = string.Join(" ", split.Skip(3).ToArray());
-                    }
-                    else
-                    {
-                        Name = string.Join(" ", split.Skip(2).ToArray());
-                    }
+                    ParseUnitsFrom(split, 2);
                 }
                 //it's just a number
                 else
                 {
                     Quantity = firstQuantity;
-                    if (IsUnit(split[1]))
-                    {
-                        Unit = split[1];
-                        Name = string.Join(" ", split.Skip(2).ToArray());
-                    }
-                    else
-                    {
-                        Name = string.Join(" ", split.Skip(1).ToArray());
-                    }
+                    ParseUnitsFrom(split, 1);
                 }
             }
             else
             {
-                Name = text;
+                ParseUnitsFrom(split, 0);
+            }
+            if (Unit != null && Quantity == 0)
+            {
+                Quantity = 1;
+            }
+        }
+
+        private void ParseUnitsFrom(string[] split, int idx)
+        {
+            if (IsUnit(split[idx]))
+            {
+                Unit = split[idx];
+                Name = string.Join(" ", split.Skip(idx + 1).ToArray());
+            }
+            else
+            {
+                Name = string.Join(" ", split.Skip(idx).ToArray());
             }
         }
 
