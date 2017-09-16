@@ -18,6 +18,7 @@ namespace BroccoliScraper
             Recipe recipe = scraper.GetRecipe("scrambled eggs");
             Console.WriteLine(recipe.ToString());
             Console.ReadKey(true);
+            new FoodData(@"..\..\..\cnf-fcen-csv\");
         }
     }
 }
