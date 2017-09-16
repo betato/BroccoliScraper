@@ -14,10 +14,9 @@ namespace BroccoliScraper
 
         static void Main(string[] args)
         {
-            HtmlWeb webGet = new HtmlWeb();
-            //var doc = webGet.Load("http://allrecipes.com/search/results/?wt=croissant&sort=re");
-            var doc = webGet.Load("http://www.food.com/search/croissant");
-            var root = doc.DocumentNode;
+            AllRecipesScraper scraper = new AllRecipesScraper();
+            Recipe recipe = scraper.GetRecipe("cake");
+            Console.ReadKey(false);
 
             
         }
