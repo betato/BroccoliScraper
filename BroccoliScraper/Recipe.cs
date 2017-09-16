@@ -48,7 +48,7 @@ namespace BroccoliScraper
             if (firstType == QuantityType.Fraction)
             {
                 Quantity = firstQuantity;
-                if (units.Contains(split[1]))
+                if (IsUnit(split[1]))
                 {
                     Unit = split[1];
                     Name = string.Join(" ", split.Skip(2).ToArray());
@@ -65,7 +65,7 @@ namespace BroccoliScraper
                 if (secondType == QuantityType.Fraction)
                 {
                     Quantity = firstQuantity + secondQuantity;
-                    if (units.Contains(split[2]))
+                    if (IsUnit(split[2]))
                     {
                         Unit = split[2];
                         Name = string.Join(" ", split.Skip(3).ToArray());
@@ -79,7 +79,7 @@ namespace BroccoliScraper
                 else
                 {
                     Quantity = firstQuantity;
-                    if (units.Contains(split[1]))
+                    if (IsUnit(split[1]))
                     {
                         Unit = split[1];
                         Name = string.Join(" ", split.Skip(2).ToArray());
@@ -121,6 +121,10 @@ namespace BroccoliScraper
             return QuantityType.None;
         }
 
+        private bool IsUnit(string text)
+        {
+            return units.Contains(text, StringComparer.OrdinalIgnoreCase);
+        }
 
         public override string ToString()
         {
