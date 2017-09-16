@@ -48,6 +48,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConversionFactor.cs" />
+    <Compile Include="FoodData.cs" />
+    <Compile Include="FoodName.cs" />
+    <Compile Include="IngredientLookup.cs" />
+    <Compile Include="MeasureName.cs" />
+    <Compile Include="NutrientAmount.cs" />
+    <Compile Include="NutrientName.cs" />
     <Compile Include="AllRecipesScraper.cs" />
     <Compile Include="Food2ForkScraper.cs" />
     <Compile Include="RecipeScraper.cs" />
