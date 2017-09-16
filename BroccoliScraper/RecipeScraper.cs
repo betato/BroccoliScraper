@@ -18,7 +18,8 @@ namespace BroccoliScraper
             "cup",
             "cups",
             "ounce",
-            "ounces"
+            "ounces",
+            "tbsp"
         };
 
         public abstract Recipe GetRecipe(string search);
