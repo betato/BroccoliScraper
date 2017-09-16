@@ -14,7 +14,7 @@ namespace BroccoliScraper
 
         static void Main(string[] args)
         {
-            AllRecipesScraper scraper = new AllRecipesScraper();
+            Food2ForkScraper scraper = new Food2ForkScraper();
             Recipe recipe = scraper.GetRecipe("scrambled eggs");
             Console.WriteLine(recipe.ToString());
             Console.ReadKey(true);
