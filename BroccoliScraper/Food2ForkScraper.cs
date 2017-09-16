@@ -41,7 +41,7 @@ namespace BroccoliScraper
             recipe.Ingredients = new List<Ingredient>();
             foreach (string ingredient in ingredients)
             {
-                recipe.Ingredients.Add(parseIngredient(ingredient));
+                recipe.Ingredients.Add(new Ingredient(ingredient));
             }
             return recipe;
         }

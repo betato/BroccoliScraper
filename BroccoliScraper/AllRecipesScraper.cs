@@ -25,7 +25,7 @@ namespace BroccoliScraper
             {
                 if (isIngredientEntry(node))
                 {
-                    ingredients.Add(parseIngredient(node.ChildNodes[1].ChildNodes[3].InnerText));
+                    ingredients.Add(new Ingredient(node.ChildNodes[1].ChildNodes[3].InnerText));
                 }
             }
             Recipe recipe = new Recipe();

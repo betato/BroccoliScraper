@@ -51,7 +51,6 @@
     <Compile Include="ConversionFactor.cs" />
     <Compile Include="FoodData.cs" />
     <Compile Include="FoodName.cs" />
-    <Compile Include="IngredientLookup.cs" />
     <Compile Include="MeasureName.cs" />
     <Compile Include="NutrientAmount.cs" />
     <Compile Include="NutrientName.cs" />
