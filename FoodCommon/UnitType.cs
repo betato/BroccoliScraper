@@ -1,4 +1,4 @@
-﻿namespace BroccoliScraper
+﻿namespace FoodCommon
 {
     public enum UnitType
     {

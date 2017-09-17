@@ -6,7 +6,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 
-namespace BroccoliScraper
+namespace FoodData
 {
     class FoodName
     {

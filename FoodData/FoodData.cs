@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.IO;
 using FoodCommon;
 
-namespace BroccoliScraper
+namespace FoodData
 {
     class FoodData
     {

@@ -5,9 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 using System.IO;
+using FoodCommon;
 using Newtonsoft.Json;
 
-namespace BroccoliScraper
+namespace FoodData
 {
     class Program
     {

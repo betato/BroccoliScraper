@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FoodCommon;
 
-namespace BroccoliScraper
+namespace FoodData
 {
 
     class Measure
