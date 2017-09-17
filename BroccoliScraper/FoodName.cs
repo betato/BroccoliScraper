@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+
 
 namespace BroccoliScraper
 {
@@ -14,6 +16,8 @@ namespace BroccoliScraper
         public int Group { get; private set; }
         public int Source { get; private set; }
 
+        Regex betweenQuotes = new Regex("\".*?\"");
+
         public FoodName(string line) {
             try
             {
@@ -22,7 +26,12 @@ namespace BroccoliScraper
                 Code = Int32.Parse(split[1]);
                 Group = Int32.Parse(split[2]);
                 Source = Int32.Parse(split[3]);
-                Description = split[5].Replace("[\" ]", "").Split(',');
+                Description = betweenQuotes.Matches(line)[0].ToString().Split(',');
+                for (int i = 0; i < Description.Length; i++)
+                {
+                    Description[i] = Description[i].Replace('"', '\0');
+                    Description[i] = Description[i].Trim();
+                }
             }
             catch (Exception)
             {
