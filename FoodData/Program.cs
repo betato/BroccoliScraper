@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 using System.IO;
+using Newtonsoft.Json;
 
 namespace BroccoliScraper
 {
@@ -34,18 +35,21 @@ namespace BroccoliScraper
                     row.Nutrients = new List<Nutrient>();
                     foreach (var nutrientAmount in food.nutrients)
                     {
-                        var newNutrient = new Nutrient();
-                        var nutrientName = data.nutrientNames[nutrientAmount.NutrientID];
-                        newNutrient.Name = nutrientName.Name;
-                        newNutrient.Symbol = nutrientName.NutrientSymbol;
-                        newNutrient.Unit = nutrientName.NutrientUnit;
-                        newNutrient.Quantity = nutrientAmount.NutrientValue;
-                        row.Nutrients.Add(newNutrient);
+                        if (data.nutrientNames.ContainsKey(nutrientAmount.NutrientID))
+                        {
+                            var newNutrient = new Nutrient();
+                            var nutrientName = data.nutrientNames[nutrientAmount.NutrientID];
+                            newNutrient.Name = nutrientName.Name;
+                            newNutrient.Symbol = nutrientName.NutrientSymbol;
+                            newNutrient.Unit = nutrientName.NutrientUnit;
+                            newNutrient.Quantity = nutrientAmount.NutrientValue / measure.Quantity;
+                            row.Nutrients.Add(newNutrient);
+                        }
                     }
                     rows.Add(row);
                 }
             }
-            JsonConverter
+            File.WriteAllText("food_data.txt", JsonConvert.SerializeObject(rows));
         }
     }
 }
