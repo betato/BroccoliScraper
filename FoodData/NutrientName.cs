@@ -27,11 +27,19 @@ namespace BroccoliScraper
                 NutrientSymbol = split[2];
                 NutrientUnit = split[3];
 
-                Name = betweenQuotes.Matches(line)[0].ToString().Split(',');
-                for (int i = 0; i < Name.Length; i++)
+                if (line.Contains('"'))
                 {
-                    Name[i] = Name[i].Replace("\"", string.Empty);
-                    Name[i] = Name[i].Trim();
+                    // Split quote delimited sections
+                    Name = betweenQuotes.Matches(line)[0].ToString().Split(',');
+                    for (int i = 0; i < Name.Length; i++)
+                    {
+                        Name[i] = Name[i].Replace("\"", string.Empty);
+                        Name[i] = Name[i].Trim();
+                    }
+                }
+                else
+                {
+                    Name = new string[] { split[4] };
                 }
             }
             catch (Exception)

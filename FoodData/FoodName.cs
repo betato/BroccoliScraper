@@ -27,12 +27,22 @@ namespace BroccoliScraper
                 Code = Int32.Parse(split[1]);
                 Group = Int32.Parse(split[2]);
                 Source = Int32.Parse(split[3]);
-                Description = betweenQuotes.Matches(line)[0].ToString().Split(',');
-                for (int i = 0; i < Description.Length; i++)
+
+                if (line.Contains('"'))
                 {
-                    Description[i] = Description[i].Replace("\"", string.Empty);
-                    Description[i] = Description[i].Trim();
+                    // Split quote delimited sections
+                    Description = betweenQuotes.Matches(line)[0].ToString().Split(',');
+                    for (int i = 0; i < Description.Length; i++)
+                    {
+                        Description[i] = Description[i].Replace("\"", string.Empty);
+                        Description[i] = Description[i].Trim();
+                    }
                 }
+                else
+                {
+                    Description = new string[] { split[4] };
+                }
+                
             }
             catch (Exception)
             {
