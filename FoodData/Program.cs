@@ -17,11 +17,11 @@ namespace BroccoliScraper
             List<DbRow> rows = new List<DbRow>();
             foreach (var food in data.foods)
             {
-                if (food.Description != null)
+                if (food.Value.Description != null)
                 {
                     DbRow row = new DbRow();
-                    row.Description = food.Description;
-                    Measure measure = data.getMeasure(food);
+                    row.Description = food.Value.Description;
+                    Measure measure = data.getMeasure(food.Value);
                     if (measure == null)
                     {
                         continue;

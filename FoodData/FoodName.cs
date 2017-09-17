@@ -15,6 +15,7 @@ namespace BroccoliScraper
         public int Code { get; private set; }
         public int Group { get; private set; }
         public int Source { get; private set; }
+        public List<NutrientAmount> nutrients = new List<NutrientAmount>();
 
         Regex betweenQuotes = new Regex("\".*?\"");
 

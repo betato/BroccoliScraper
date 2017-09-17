@@ -14,12 +14,17 @@ namespace BroccoliScraper
 
         public NutrientAmount(string line)
         {
-           
+            try
+            {
                 string[] split = line.Split(',');
                 FoodId = Int32.Parse(split[0]);
                 NutrientID = Int32.Parse(split[1]);
                 NutrientValue = float.Parse(split[2]);
-            
+            }
+            catch (Exception)
+            {
+                
+            }
         }
     }
 }
