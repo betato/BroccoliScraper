@@ -21,16 +21,20 @@ namespace BroccoliScraper
             string title = doc.DocumentNode.SelectNodes("//*[contains(@class, 'recipe-summary__h1')]").First().InnerText;
             List<HtmlNode> checklistEntries = doc.DocumentNode.SelectNodes("//*[contains(@class, 'checkList__line')]").ToList();
             List<Ingredient> ingredients = new List<Ingredient>();
+            List<Ingredient> normalizedIngredients = new List<Ingredient>();
             foreach (var node in checklistEntries)
             {
                 if (isIngredientEntry(node))
                 {
-                    ingredients.Add(new Ingredient(node.ChildNodes[1].ChildNodes[3].InnerText));
+                    Ingredient next = new Ingredient(node.ChildNodes[1].ChildNodes[3].InnerText);
+                    ingredients.Add(next);
+                    normalizedIngredients.Add(Ingredient.NormalizeUnits(next));
                 }
             }
             Recipe recipe = new Recipe();
             recipe.Name = title;
             recipe.Ingredients = ingredients;
+            recipe.IngredientsNormalized = normalizedIngredients;
             //there's a mysterious blank ingredient at the end, so we remove it
             recipe.Ingredients.RemoveAt(recipe.Ingredients.Count - 1);
             return recipe;

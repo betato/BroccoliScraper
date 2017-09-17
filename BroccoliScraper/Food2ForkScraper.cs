@@ -39,9 +39,12 @@ namespace BroccoliScraper
             Recipe recipe = new Recipe();
             recipe.Name = (string)(getResponseObj["recipe"]["title"]);
             recipe.Ingredients = new List<Ingredient>();
-            foreach (string ingredient in ingredients)
+            recipe.IngredientsNormalized = new List<Ingredient>();
+            foreach (string ingredientStr in ingredients)
             {
-                recipe.Ingredients.Add(new Ingredient(ingredient));
+                Ingredient next = new Ingredient(ingredientStr);
+                recipe.Ingredients.Add(new Ingredient(ingredientStr));
+                recipe.IngredientsNormalized.Add(Ingredient.NormalizeUnits(next));
             }
             return recipe;
         }

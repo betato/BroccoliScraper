@@ -31,6 +31,11 @@ namespace BroccoliScraper
             { "pinch", UnitType.Pinch },
         };
 
+        public Ingredient()
+        {
+
+        }
+
         public Ingredient(string text)
         {
             text = text.Replace('(', ' ');
@@ -68,6 +73,41 @@ namespace BroccoliScraper
             }
         }
 
+        public static Ingredient NormalizeUnits(Ingredient ingredient)
+        {
+            Ingredient newIngredient = new Ingredient();
+            newIngredient.Name = ingredient.Name;
+            switch (ingredient.Unit)
+            {
+                case UnitType.Cup:
+                    newIngredient.Quantity = ingredient.Quantity * 236.588f;
+                    newIngredient.Unit = UnitType.Millilitre;
+                    break;
+                case UnitType.Ounce:
+                    newIngredient.Quantity = ingredient.Quantity * 28.3495f;
+                    newIngredient.Unit = UnitType.Gram;
+                    break;
+                case UnitType.Pinch:
+                    newIngredient.Quantity = ingredient.Quantity * 4.92892f;
+                    newIngredient.Unit = UnitType.Millilitre;
+                    break;
+                case UnitType.Pound:
+                    newIngredient.Quantity = ingredient.Quantity * 453.592f;
+                    newIngredient.Unit = UnitType.Gram;
+                    break;
+                case UnitType.Tablespoon:
+                    newIngredient.Quantity = ingredient.Quantity * 14.7868f;
+                    newIngredient.Unit = UnitType.Millilitre;
+                    break;
+                case UnitType.Teaspoon:
+                    newIngredient.Quantity = ingredient.Quantity * 4.92892f;
+                    newIngredient.Unit = UnitType.Millilitre;
+                    break;
+            }
+            return newIngredient;
+            
+        }
+
         private void ParseUnitsFrom(string[] split, int idx)
         {
             if (IsUnit(split[idx]))
@@ -97,6 +137,7 @@ namespace BroccoliScraper
 
         public string Name { get; set; }
         public List<Ingredient> Ingredients { get; set; }
+        public List<Ingredient> IngredientsNormalized { get; set; }
 
         public override string ToString()
         {

@@ -49,7 +49,7 @@ namespace BroccoliScraper
                     rows.Add(row);
                 }
             }
-            File.WriteAllText("food_data.txt", JsonConvert.SerializeObject(rows));
+            File.WriteAllText("food_data.txt", JsonConvert.SerializeObject(rows), Encoding.UTF8);
         }
     }
 }
