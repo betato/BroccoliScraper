@@ -46,7 +46,7 @@ namespace BroccoliScraper
             }
             catch (Exception)
             {
-
+                Console.WriteLine("Error parsing food name");
             }
         }
     }

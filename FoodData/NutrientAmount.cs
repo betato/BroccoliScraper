@@ -23,7 +23,7 @@ namespace BroccoliScraper
             }
             catch (Exception)
             {
-                
+                Console.WriteLine("Error parsing nutrient amount");
             }
         }
     }

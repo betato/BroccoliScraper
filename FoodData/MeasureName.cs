@@ -21,7 +21,7 @@ namespace BroccoliScraper
             }
             catch (Exception)
             {
-
+                Console.WriteLine("Error parsing measurement name");
             }
         }
     }
