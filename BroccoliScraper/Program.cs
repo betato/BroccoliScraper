@@ -27,7 +27,6 @@ namespace BroccoliScraper
                 recipe = scraper.GetRecipe(args[0]);
             }
             Console.WriteLine(JsonConvert.SerializeObject(recipe));
-            Console.ReadKey();
         }
     }
 }
