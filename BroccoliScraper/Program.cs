@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using HtmlAgilityPack;
 using System.Web;
 using System.IO;
+using Newtonsoft.Json;
 
 namespace BroccoliScraper
 {
@@ -16,8 +17,16 @@ namespace BroccoliScraper
         static void Main(string[] args)
         {
             Food2ForkScraper scraper = new Food2ForkScraper();
-            Recipe recipe = scraper.GetRecipe("scrambled eggs");
-            Console.WriteLine(recipe.ToString());
+            Recipe recipe = null;
+            if (args.Length == 0)
+            {
+                recipe = scraper.GetRecipe("spring rolls");
+            }
+            else
+            {
+                recipe = scraper.GetRecipe(args[0]);
+            }
+            Console.WriteLine(JsonConvert.SerializeObject(recipe));
             Console.ReadKey();
         }
     }
