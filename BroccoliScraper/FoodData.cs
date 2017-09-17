@@ -45,30 +45,45 @@ namespace BroccoliScraper
             }
         }
 
-        public float getMeasure(FoodName food)
+        public Measure getMeasure(FoodName food)
         {
             if (!conversionFactors.ContainsKey(food.FoodId))
             {
                 Console.WriteLine("No factor for {0}", string.Join(":", food.Description));
-                return float.NaN;
+                return null;
             }
             ConversionFactor cv = conversionFactors[food.FoodId];
             if (!measureNames.ContainsKey(cv.MeasureId))
             {
                 Console.WriteLine("No measure for {0}", string.Join(":", food.Description));
-                return float.NaN;
+                return null;
             }
             MeasureName mn = measureNames[cv.MeasureId];
+            Measure measure = new Measure();
             string[] split = mn.Description.Split(' ');
             for (int i = split[0].Length; i > 0; i--)
             {
                 if (Ingredient.ParseQuantity(split[0].Substring(0, i), out float quantity) != Ingredient.QuantityType.None)
                 {
-                    return quantity * cv.Factor;
+                    measure.Quantity = quantity;
+                    string unitStr = split[0].Substring(i);
+                    if (unitStr == "g")
+                    {
+                        measure.Unit = UnitType.Gram;
+                    }
+                    else if (unitStr == "ml")
+                    {
+                        measure.Unit = UnitType.Millilitre;
+                    }
+                    else
+                    {
+                        measure.Unit = UnitType.None;
+                    }
+                    return measure;
                 }
             }
            
-            return float.NaN;
+            return null;
         }
 
         
