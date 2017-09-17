@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FoodCommon;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,13 +14,6 @@ namespace BroccoliScraper
         public string Name { get; set; } = null;
         public UnitType Unit { get; set; } = UnitType.None;
         public float Quantity { get; set; } = 0.0f;
-
-        public enum QuantityType
-        {
-            Fraction,
-            Number,
-            None
-        }
 
         private Dictionary<string, UnitType> units = new Dictionary<string, UnitType>
         {
@@ -42,17 +36,17 @@ namespace BroccoliScraper
             text = text.Replace('(', ' ');
             text = text.Replace(')', ' ');
             string[] split = text.Split(' ');
-            QuantityType firstType = ParseQuantity(split[0], out float firstQuantity);
-            if (firstType == QuantityType.Fraction)
+            Util.QuantityType firstType = Util.ParseQuantity(split[0], out float firstQuantity);
+            if (firstType == Util.QuantityType.Fraction)
             {
                 Quantity = firstQuantity;
                 ParseUnitsFrom(split, 1);
             }
-            else if (firstType == QuantityType.Number)
+            else if (firstType == Util.QuantityType.Number)
             {
-                QuantityType secondType = ParseQuantity(split[1], out float secondQuantity);
+                Util.QuantityType secondType = Util.ParseQuantity(split[1], out float secondQuantity);
                 //we have a mixed fraction
-                if (secondType == QuantityType.Fraction)
+                if (secondType == Util.QuantityType.Fraction)
                 {
                     Quantity = firstQuantity + secondQuantity;
                     ParseUnitsFrom(split, 2);
@@ -85,31 +79,6 @@ namespace BroccoliScraper
             {
                 Name = string.Join(" ", split.Skip(idx).ToArray());
             }
-        }
-
-        public static QuantityType ParseQuantity(string text, out float quantity)
-        {
-            if (text == "A" || text == "a")
-            {
-                quantity = 1.0f;
-                return QuantityType.Number;
-            }
-            if (float.TryParse(text, out float result))
-            {
-                quantity = result;
-                return QuantityType.Number;
-            }
-            else if (text.Contains('/'))
-            {
-                var fractionSplit = text.Split('/');
-                if (float.TryParse(fractionSplit[0], out float numerator) && float.TryParse(fractionSplit[1], out float denominator))
-                {
-                    quantity = numerator / denominator;
-                    return QuantityType.Fraction;
-                }
-            }
-            quantity = float.NaN;
-            return QuantityType.None;
         }
 
         private bool IsUnit(string text)

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using FoodCommon;
 
 namespace BroccoliScraper
 {
@@ -63,7 +64,7 @@ namespace BroccoliScraper
             string[] split = mn.Description.Split(' ');
             for (int i = split[0].Length; i > 0; i--)
             {
-                if (Ingredient.ParseQuantity(split[0].Substring(0, i), out float quantity) != Ingredient.QuantityType.None)
+                if (Util.ParseQuantity(split[0].Substring(0, i), out float quantity) != Util.QuantityType.None)
                 {
                     measure.Quantity = quantity;
                     string unitStr = split[0].Substring(i);
