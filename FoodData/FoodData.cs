@@ -12,8 +12,10 @@ namespace BroccoliScraper
     {
         public List<FoodName> foods = new List<FoodName>();
         public Dictionary<int, ConversionFactor> conversionFactors = new Dictionary<int, ConversionFactor>();
-        //public List<ConversionFactor> conversionFactors = new List<ConversionFactor>();
         public Dictionary<int, MeasureName> measureNames = new Dictionary<int, MeasureName>();
+
+        public Dictionary<int, NutrientAmount> nutrientAmounts = new Dictionary<int, NutrientAmount>();
+        public Dictionary<int, NutrientName> nutrientNames = new Dictionary<int, NutrientName>();
 
         public FoodData(string dir)
         {
@@ -42,6 +44,26 @@ namespace BroccoliScraper
                 if (!measureNames.ContainsKey(mn.MeasureId))
                 {
                     measureNames.Add(mn.MeasureId, mn);
+                }
+            }
+
+            lines = File.ReadAllLines(dir + "NUTRIENT AMOUNT.csv");
+            foreach (string line in lines)
+            {
+                NutrientAmount na = new NutrientAmount(line);
+                if (!nutrientAmounts.ContainsKey(na.FoodId))
+                {
+                    nutrientAmounts.Add(na.FoodId, na);
+                }
+            }
+
+            lines = File.ReadAllLines(dir + "NUTRIENT NAME.csv");
+            foreach (string line in lines)
+            {
+                NutrientName nn = new NutrientName(line);
+                if (!nutrientNames.ContainsKey(nn.NutrientID))
+                {
+                    nutrientNames.Add(nn.NutrientID, nn);
                 }
             }
         }
