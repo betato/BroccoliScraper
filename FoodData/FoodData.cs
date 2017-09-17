@@ -19,7 +19,7 @@ namespace BroccoliScraper
 
         public FoodData(string dir)
         {
-            string[] lines = File.ReadAllLines(dir + "FOOD NAME.csv");
+            string[] lines = File.ReadAllLines(dir + "FOOD NAME.csv", Encoding.UTF8);
             foreach (string line in lines)
             {
                 FoodName name = new FoodName(line);
@@ -29,7 +29,7 @@ namespace BroccoliScraper
                 }
             }
 
-            lines = File.ReadAllLines(dir + "CONVERSION FACTOR.csv");
+            lines = File.ReadAllLines(dir + "CONVERSION FACTOR.csv", Encoding.UTF8);
             foreach (string line in lines)
             {
                 ConversionFactor cv = new ConversionFactor(line);
@@ -41,7 +41,7 @@ namespace BroccoliScraper
                 }
             }
 
-            lines = File.ReadAllLines(dir + "MEASURE NAME.csv");
+            lines = File.ReadAllLines(dir + "MEASURE NAME.csv", Encoding.UTF8);
             foreach (string line in lines)
             {
                 MeasureName mn = new MeasureName(line);
@@ -51,7 +51,7 @@ namespace BroccoliScraper
                 }
             }
 
-            lines = File.ReadAllLines(dir + "NUTRIENT AMOUNT.csv");
+            lines = File.ReadAllLines(dir + "NUTRIENT AMOUNT.csv", Encoding.UTF8);
             foreach (string line in lines)
             {
                 NutrientAmount na = new NutrientAmount(line);
@@ -61,7 +61,7 @@ namespace BroccoliScraper
                 }
             }
 
-            lines = File.ReadAllLines(dir + "NUTRIENT NAME.csv");
+            lines = File.ReadAllLines(dir + "NUTRIENT NAME.csv", Encoding.UTF8);
             foreach (string line in lines)
             {
                 NutrientName nn = new NutrientName(line);
