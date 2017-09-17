@@ -8,6 +8,8 @@
         Ounce,
         Pound,
         Pinch,
+        Gram,
+        Millilitre,
         None
     }
 
