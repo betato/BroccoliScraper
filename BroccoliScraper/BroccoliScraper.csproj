@@ -49,6 +49,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConversionFactor.cs" />
+    <Compile Include="DbRow.cs" />
+    <Compile Include="Food.cs" />
     <Compile Include="FoodData.cs" />
     <Compile Include="FoodName.cs" />
     <Compile Include="MeasureName.cs" />

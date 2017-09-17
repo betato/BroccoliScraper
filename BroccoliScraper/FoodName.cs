@@ -29,7 +29,7 @@ namespace BroccoliScraper
                 Description = betweenQuotes.Matches(line)[0].ToString().Split(',');
                 for (int i = 0; i < Description.Length; i++)
                 {
-                    Description[i] = Description[i].Replace('"', '\0');
+                    Description[i] = Description[i].Replace("\"", string.Empty);
                     Description[i] = Description[i].Trim();
                 }
             }

@@ -38,7 +38,7 @@ namespace BroccoliScraper
             foreach (string line in lines)
             {
                 MeasureName mn = new MeasureName(line);
-                if (!conversionFactors.ContainsKey(mn.MeasureId))
+                if (!measureNames.ContainsKey(mn.MeasureId))
                 {
                     measureNames.Add(mn.MeasureId, mn);
                 }
@@ -47,7 +47,17 @@ namespace BroccoliScraper
 
         public float getMeasure(FoodName food)
         {
+            if (!conversionFactors.ContainsKey(food.FoodId))
+            {
+                Console.WriteLine("No factor for {0}", string.Join(":", food.Description));
+                return float.NaN;
+            }
             ConversionFactor cv = conversionFactors[food.FoodId];
+            if (!measureNames.ContainsKey(cv.MeasureId))
+            {
+                Console.WriteLine("No measure for {0}", string.Join(":", food.Description));
+                return float.NaN;
+            }
             MeasureName mn = measureNames[cv.MeasureId];
             string[] split = mn.Description.Split(' ');
             for (int i = split[0].Length; i > 0; i--)
@@ -57,8 +67,10 @@ namespace BroccoliScraper
                     return quantity * cv.Factor;
                 }
             }
+           
             return float.NaN;
         }
 
+        
     }
 }
