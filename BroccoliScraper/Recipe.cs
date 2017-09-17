@@ -11,7 +11,7 @@ namespace BroccoliScraper
     {
 
         public string Name { get; set; } = null;
-        public UnitType Unit { get; set; } = UnitType.None
+        public UnitType Unit { get; set; } = UnitType.None;
         public float Quantity { get; set; } = 0.0f;
 
         public enum QuantityType
