@@ -43,8 +43,6 @@ namespace BroccoliScraper
                     measureNames.Add(mn.MeasureId, mn);
                 }
             }
-            Console.WriteLine(foods[5].Description[1]);
-            Console.WriteLine(getMeasure(foods[5]));
         }
 
         public float getMeasure(FoodName food)
