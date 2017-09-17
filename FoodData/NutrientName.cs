@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace BroccoliScraper
@@ -12,7 +13,9 @@ namespace BroccoliScraper
         public int NutrientCode { get; private set; }
         public string NutrientSymbol { get; private set; }
         public string NutrientUnit { get; private set; }
-        public string Name { get; private set; }
+        public string[] Name { get; private set; }
+
+        Regex betweenQuotes = new Regex("\".*?\"");
 
         public NutrientName(string line)
         {
@@ -23,7 +26,13 @@ namespace BroccoliScraper
                 NutrientCode = Int32.Parse(split[1]);
                 NutrientSymbol = split[2];
                 NutrientUnit = split[3];
-                Name = split[4];
+
+                Name = betweenQuotes.Matches(line)[0].ToString().Split(',');
+                for (int i = 0; i < Name.Length; i++)
+                {
+                    Name[i] = Name[i].Replace("\"", string.Empty);
+                    Name[i] = Name[i].Trim();
+                }
             }
             catch (Exception)
             {
