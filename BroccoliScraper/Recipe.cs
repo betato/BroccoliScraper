@@ -10,9 +10,9 @@ namespace BroccoliScraper
     class Ingredient
     {
 
-        public string Name { get; set; }
-        public string Unit { get; set; }
-        public float Quantity { get; set; }
+        public string Name { get; set; } = null;
+        public UnitType Unit { get; set; } = UnitType.None
+        public float Quantity { get; set; } = 0.0f;
 
         enum QuantityType
         {
@@ -21,22 +21,20 @@ namespace BroccoliScraper
             None
         }
 
-        private string[] units =
+        private Dictionary<string, UnitType> units = new Dictionary<string, UnitType>
         {
-            "tablespoon",
-            "tablespoons",
-            "teaspoon",
-            "teaspoons",
-            "cup",
-            "cups",
-            "ounce",
-            "ounces",
-            "tbsp",
-            "pound",
-            "pounds",
-            "pinch",
-            "strip",
-            "strips"
+            { "tablespoon", UnitType.Tablespoon },
+            { "tablespoons", UnitType.Tablespoon },
+            { "teaspoon", UnitType.Teaspoon },
+            { "teaspoons", UnitType.Teaspoon },
+            { "cup", UnitType.Cup },
+            { "cups", UnitType.Cup },
+            { "ounce", UnitType.Ounce },
+            { "ounces", UnitType.Ounce },
+            { "tbsp", UnitType.Tablespoon },
+            { "pound", UnitType.Pound },
+            { "pounds", UnitType.Pound },
+            { "pinch", UnitType.Pinch },
         };
 
         public Ingredient(string text)
@@ -80,7 +78,7 @@ namespace BroccoliScraper
         {
             if (IsUnit(split[idx]))
             {
-                Unit = split[idx];
+                Unit = units[split[idx]];
                 Name = string.Join(" ", split.Skip(idx + 1).ToArray());
             }
             else
@@ -116,7 +114,7 @@ namespace BroccoliScraper
 
         private bool IsUnit(string text)
         {
-            return units.Contains(text, StringComparer.OrdinalIgnoreCase);
+            return units.Keys.Contains(text, StringComparer.OrdinalIgnoreCase);
         }
 
         public override string ToString()
