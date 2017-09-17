@@ -9,7 +9,7 @@ namespace BroccoliScraper
     class MeasureName
     {
         public int MeasureId { get; private set; }
-        public string[] Description { get; private set; }
+        public string Description { get; private set; }
 
         public MeasureName(string line)
         {
@@ -17,7 +17,7 @@ namespace BroccoliScraper
             {
                 string[] split = line.Split(',');
                 MeasureId = Int32.Parse(split[0]);
-                Description = split[1].Replace("[\" ]", "").Split(',');
+                Description = split[1].Replace("[\" ]", "");
             }
             catch (Exception)
             {

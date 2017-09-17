@@ -43,14 +43,24 @@ namespace BroccoliScraper
                     measureNames.Add(mn.MeasureId, mn);
                 }
             }
+            Console.WriteLine(foods[5].Description[1]);
+            Console.WriteLine(getMeasure(foods[5]));
         }
 
-        public void getMeasure(FoodName food)
+        public float getMeasure(FoodName food)
         {
             ConversionFactor cv = conversionFactors[food.FoodId];
             MeasureName mn = measureNames[cv.MeasureId];
-            
-            Console.WriteLine();
+            string[] split = mn.Description.Split(' ');
+            for (int i = split[0].Length; i > 0; i--)
+            {
+                if (Ingredient.ParseQuantity(split[0].Substring(0, i), out float quantity) != Ingredient.QuantityType.None)
+                {
+                    return quantity * cv.Factor;
+                }
+            }
+            return float.NaN;
         }
+
     }
 }
