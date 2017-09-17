@@ -14,7 +14,7 @@ namespace BroccoliScraper
         public UnitType Unit { get; set; } = UnitType.None
         public float Quantity { get; set; } = 0.0f;
 
-        enum QuantityType
+        public enum QuantityType
         {
             Fraction,
             Number,
@@ -87,7 +87,7 @@ namespace BroccoliScraper
             }
         }
 
-        private QuantityType ParseQuantity(string text, out float quantity)
+        public static QuantityType ParseQuantity(string text, out float quantity)
         {
             if (text == "A" || text == "a")
             {
